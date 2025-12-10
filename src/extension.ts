@@ -50,6 +50,7 @@ import { SettingsSyncService } from "./services/settings-sync/SettingsSyncServic
 import { ManagedIndexer } from "./services/code-index/managed/ManagedIndexer" // kilocode_change
 import { flushModels, getModels, initializeModelCacheRefresh } from "./api/providers/fetchers/modelCache"
 import { kilo_initializeSessionManager } from "./shared/kilocode/cli-sessions/extension/session-manager-utils" // kilocode_change
+import { initializeLeCoderWorkspace, isLeCoderWorkspaceInitialized } from "./storage/workspace-init"
 
 // kilocode_change start
 async function findKilocodeTokenFromAnyProfile(provider: ClineProvider): Promise<string | undefined> {
@@ -95,7 +96,7 @@ let userInfoHandler: ((data: { userInfo: CloudUserInfo }) => Promise<void>) | un
 // Your extension is activated the very first time the command is executed.
 export async function activate(context: vscode.ExtensionContext) {
 	extensionContext = context
-	outputChannel = vscode.window.createOutputChannel("Kilo-Code")
+	outputChannel = vscode.window.createOutputChannel("LeCoder AI")
 	context.subscriptions.push(outputChannel)
 	outputChannel.appendLine(`${Package.name} extension activated - ${JSON.stringify(Package)}`)
 
@@ -158,6 +159,31 @@ export async function activate(context: vscode.ExtensionContext) {
 	}
 
 	const contextProxy = await ContextProxy.getInstance(context)
+
+	// Initialize .lecoder/ workspace for all workspace folders.
+	if (vscode.workspace.workspaceFolders) {
+		for (const folder of vscode.workspace.workspaceFolders) {
+			const workspaceRoot = folder.uri.fsPath
+			
+			try {
+				// Check if workspace is already initialized to avoid redundant initialization
+				const isInitialized = await isLeCoderWorkspaceInitialized(workspaceRoot)
+				
+				if (!isInitialized) {
+					await initializeLeCoderWorkspace(workspaceRoot)
+					outputChannel.appendLine(`[LeCoder] Initialized workspace at: ${workspaceRoot}`)
+				} else {
+					outputChannel.appendLine(`[LeCoder] Workspace already initialized at: ${workspaceRoot}`)
+				}
+			} catch (error) {
+				const message = error instanceof Error ? error.message : String(error)
+				outputChannel.appendLine(
+					`[LeCoder] Error initializing workspace at ${workspaceRoot}: ${message}`,
+				)
+				// Don't prevent extension activation on initialization failure
+			}
+		}
+	}
 
 	// Initialize code index managers for all workspace folders.
 	const codeIndexManagers: CodeIndexManager[] = []
@@ -345,19 +371,18 @@ export async function activate(context: vscode.ExtensionContext) {
 
 	// kilocode_change start
 	if (!context.globalState.get("firstInstallCompleted")) {
-		outputChannel.appendLine("First installation detected, opening Kilo Code sidebar!")
+		outputChannel.appendLine("First installation detected, opening LeCoder AI sidebar!")
 		try {
 			await vscode.commands.executeCommand("kilo-code.SidebarProvider.focus")
 
-			outputChannel.appendLine("Opening Kilo Code walkthrough")
-
-			// this can crash, see:
-			// https://discord.com/channels/1349288496988160052/1395865796026040470
-			await vscode.commands.executeCommand(
-				"workbench.action.openWalkthrough",
-				"kilocode.kilo-code#kiloCodeWalkthrough",
-				false,
-			)
+			// LeCoder walkthrough not yet implemented - commenting out Kilocode walkthrough
+			// outputChannel.appendLine("Opening LeCoder AI walkthrough")
+			// TODO: Create LeCoder-specific walkthrough and update command ID
+			// await vscode.commands.executeCommand(
+			// 	"workbench.action.openWalkthrough",
+			// 	"aryateja.lecoder-vscode#lecoderWalkthrough",
+			// 	false,
+			// )
 
 			// Enable autocomplete by default for new installs, but not for JetBrains IDEs
 			// JetBrains users can manually enable it if they want to test the feature
@@ -477,7 +502,7 @@ export async function activate(context: vscode.ExtensionContext) {
 	registerCodeActions(context)
 	registerTerminalActions(context)
 
-	// Allows other extensions to activate once Kilo Code is ready.
+	// Allows other extensions to activate once LeCoder AI is ready.
 	vscode.commands.executeCommand(`${Package.name}.activationCompleted`)
 
 	// Implements the `RooCodeAPI` interface.

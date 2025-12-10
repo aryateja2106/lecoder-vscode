@@ -1,6 +1,10 @@
-# Kilo Code Development Guide
+# LeCoder AI Development Guide
 
-Welcome to the Kilo Code development guide! This document will help you set up your development environment and understand how to work with the codebase. Whether you're fixing bugs, adding features, or just exploring the code, this guide will get you started.
+Welcome to the LeCoder AI development guide! This document will help you set up your development environment and understand how to work with the codebase. Whether you're fixing bugs, adding features, or just exploring the code, this guide will get you started.
+
+## About LeCoder AI
+
+LeCoder AI is an agentic research coding assistant forked from [Kilocode](https://github.com/Kilo-Org/kilocode). While we've rebranded and are building research-focused features (paper ingestion, multi-agent orchestration, Google Colab integration), much of the underlying architecture, monorepo structure, and tooling is inherited from Kilocode. This guide reflects the LeCoder-specific workflow while acknowledging our Kilocode foundation.
 
 ## Prerequisites
 
@@ -10,7 +14,7 @@ Before you begin, choose one of the following development environment options:
 
 1. **Git** - For version control
 2. **Git LFS** - For large file storage (https://git-lfs.com/) - Required for handling GIF, MP4, and other binary assets
-3. **Node.js** (version [v20.19.2](https://github.com/Kilo-Org/kilocode/blob/main/.nvmrc) recommended)
+3. **Node.js** (version [v20.19.2](https://github.com/aryateja2106/lecoder-vscode/blob/main/.nvmrc) recommended)
 4. **pnpm** - Package manager (https://pnpm.io/)
 5. **Visual Studio Code** - Our recommended IDE for development
 
@@ -41,12 +45,12 @@ Before you begin, choose one of the following development environment options:
 1. **Fork and Clone the Repository**:
 
     - **Fork the Repository**:
-        - Visit the [Kilo Code GitHub repository](https://github.com/Kilo-Org/kilocode)
+        - Visit the [LeCoder AI GitHub repository](https://github.com/aryateja2106/lecoder-vscode)
         - Click the "Fork" button in the top-right corner to create your own copy.
     - **Clone Your Fork**:
         ```bash
-        git clone https://github.com/[YOUR-USERNAME]/kilocode.git
-        cd kilocode
+        git clone https://github.com/[YOUR-USERNAME]/lecoder-vscode.git
+        cd lecoder-vscode
         ```
         Replace `[YOUR-USERNAME]` with your actual GitHub username.
 
@@ -75,7 +79,7 @@ While not strictly necessary for running the extension, these extensions are rec
 - [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) - Integrates ESLint into VS Code.
 - [Prettier - Code formatter](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) - Integrates Prettier into VS Code.
 
-The full list of recommended extensions is [here](https://github.com/Kilo-Org/kilocode/blob/main/.vscode/extensions.json)
+The full list of recommended extensions is [here](https://github.com/aryateja2106/lecoder-vscode/blob/main/.vscode/extensions.json)
 
 #### Devcontainer Setup (Recommended for Windows)
 
@@ -112,7 +116,7 @@ The full list of recommended extensions is [here](https://github.com/Kilo-Org/ki
 3. **Setup Development Environment**:
 
     ```bash
-    cd kilocode
+    cd lecoder-vscode
     direnv allow
     ```
 
@@ -140,12 +144,22 @@ The full list of recommended extensions is [here](https://github.com/Kilo-Org/ki
 The project is organized into several key directories:
 
 - **`src/`** - Core extension code
-    - **`core/`** - Core functionality and tools
-    - **`services/`** - Service implementations
+    - **`core/`** - Core functionality and tools (from Kilocode)
+    - **`services/`** - Service implementations (from Kilocode)
+    - **`agents/`** - Agent registry and management (LeCoder - Phase 2)
+    - **`tmux/`** - tmux session orchestration (LeCoder - Phase 2)
+    - **`research/`** - Paper ingestion pipeline (LeCoder - Phase 3)
+    - **`storage/`** - Local data persistence (LeCoder - Phase 1)
+    - **`orchestration/`** - Task coordination (LeCoder - Phase 4)
+    - **`colab/`** - Google Colab integration (LeCoder - Phase 6)
+    - **`ui/`** - LeCoder-specific UI panels (Phase 7)
+    - **`cost/`** - Cost tracking (LeCoder - Phase 9)
+    - **`safety/`** - Safety features (LeCoder - Phase 10)
 - **`webview-ui/`** - Frontend UI code
 - **`e2e/`** - End-to-end tests
 - **`scripts/`** - Utility scripts
 - **`assets/`** - Static assets like images and icons
+- **`.lecoder/`** - Local workspace data (created automatically, gitignored)
 
 ## Development Workflow
 
@@ -154,7 +168,7 @@ The project is organized into several key directories:
 To run the extension in development mode:
 
 1. Press `F5` (or select **Run** → **Start Debugging**) in VSCode
-2. This will open a new VSCode window with Kilo Code loaded
+2. This will open a new VSCode window with LeCoder AI loaded
 
 ### Hot Reloading
 
@@ -186,19 +200,21 @@ This will:
 3. Bundle the extension
 4. Create a `.vsix` file in the `bin/` directory
 
+**LeCoder-Specific Note**: The build produces a `lecoder-vscode-*.vsix` file (not `kilo-code-*.vsix`). The extension name and branding reflect LeCoder AI throughout.
+
 ### Installing the Built Extension
 
 To install your built extension:
 
 ```bash
-code --install-extension "$(ls -1v bin/kilo-code-*.vsix | tail -n1)"
+code --install-extension "$(ls -1v bin/lecoder-vscode-*.vsix | tail -n1)"
 ```
 
-Replace `[version]` with the current version number.
+**Note**: The filename pattern is `lecoder-vscode-*.vsix` for LeCoder AI builds.
 
 ## Testing
 
-Kilo Code uses several types of tests to ensure quality:
+LeCoder AI uses several types of tests to ensure quality (inherited from Kilocode):
 
 ### Unit Tests
 
@@ -232,8 +248,8 @@ This project uses [Husky](https://typicode.github.io/husky/) to manage Git hooks
 Before a commit is finalized, the `.husky/pre-commit` hook runs:
 
 1.  **Branch Check**: Prevents committing directly to the `main` branch.
-2.  **Type Generation**: Runs `pnpm --filter kilo-code generate-types`.
-3.  **Type File Check**: Ensures that any changes made to `src/exports/roo-code.d.ts` by the type generation are staged.
+2.  **Type Generation**: Runs `pnpm --filter lecoder-vscode generate-types` (or inherited Kilocode command).
+3.  **Type File Check**: Ensures that any changes made to type definition files are staged.
 4.  **Linting**: Runs `lint-staged` to lint and format staged files.
 
 ### Pre-push Hook
@@ -258,34 +274,35 @@ These hooks help maintain code quality and consistency. If you encounter issues 
 ### Debugging Tips
 
 - Use `console.log()` statements in your code for debugging
-- Check the Output panel in VSCode (View > Output) and select "Kilo Code" from the dropdown
+- Check the Output panel in VSCode (View > Output) and select "LeCoder AI" from the dropdown
 - For webview issues, use the browser developer tools in the webview (right-click > "Inspect Element")
 
-### Testing with Local Backend
+### Testing with LeCoder-cGPU Backend
 
-To test the extension against a local Kilo Code backend:
-
-1. **Set up your local backend** at `http://localhost:3000`
-2. **Use the "Run Extension [Local Backend]" launch configuration**:
-    - Go to Run and Debug (Ctrl+Shift+D)
-    - Select "Run Extension [Local Backend]" from the dropdown
-    - Press F5 to start debugging
-
-This automatically sets the `KILOCODE_BACKEND_BASE_URL` environment variable, making all sign-in/sign-up buttons point to your local backend instead of production.
+**Note**: LeCoder's Google Colab backend (LeCoder-cGPU) integration is planned for Phase 6. For now, the extension operates without a dedicated backend. Future documentation will cover testing against the LeCoder-cGPU backend once implemented.
 
 ## Contributing
 
-We welcome contributions to Kilo Code! Here's how you can help:
+We welcome contributions to LeCoder AI! Here's how you can help:
 
-1. **Report an issue** using [GitHub Issues](https://github.com/Kilo-Org/kilocode/issues)
+1. **Report an issue** using [GitHub Issues](https://github.com/aryateja2106/lecoder-vscode/issues)
 2. **Find an issue** and submit a Pull Request with your fix
-3. **Write tests** to improve Code Coverage
-4. **Improve Documentation** at [kilo.ai/docs](https://kilo.ai/docs)
-5. **Suggest a new feature** using [GitHub Discussions](https://github.com/Kilo-Org/kilocode/discussions/categories/ideas)!
-6. Want to **implement something new**? Awesome! We'd be glad to support you on [Discord](https://discord.gg/Ja6BkfyTzJ)!
+3. **Write tests** to improve code coverage
+4. **Improve documentation** - Update README, ARCHITECTURE.md, or phase-specific docs
+5. **Suggest a new feature** - Open a GitHub issue with the "enhancement" label
+6. **Implement research features** - Help build the paper ingestion pipeline, agent orchestration, or Colab integration
+
+For detailed contribution guidelines, see [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Community
 
-Your contributions are welcome! For questions or ideas, please join our Discord server: https://discord.gg/Ja6BkfyTzJ
+Your contributions are welcome! For questions or ideas:
+- **GitHub Issues**: https://github.com/aryateja2106/lecoder-vscode/issues
+- **Email**: contact@lesearch.ai
+- **Website**: https://lesearch.ai
 
 We look forward to your contributions and feedback!
+
+## Acknowledgments
+
+LeCoder AI is built on the foundation of [Kilocode](https://github.com/Kilo-Org/kilocode). We're grateful to the Kilocode team for their excellent work on the base extension architecture.

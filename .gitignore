@@ -69,3 +69,6 @@ qdrant_storage/
 
 # Act Secret Files
 .secrets
+
+# LeCoder workspace data (user-specific, do not commit)
+.lecoder/

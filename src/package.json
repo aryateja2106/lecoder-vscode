@@ -1,10 +1,10 @@
 {
-	"name": "kilo-code",
-	"displayName": "%extension.displayName%",
-	"description": "%extension.description%",
-	"publisher": "kilocode",
-	"version": "4.133.0",
-	"icon": "assets/icons/logo-outline-black.png",
+	"name": "lecoder-vscode",
+	"displayName": "LeCoder AI",
+	"description": "Agentic research coding assistant for VS Code. Orchestrate multiple AI agents, reproduce research papers, and run experiments on Google Colab—all from your editor.",
+	"publisher": "aryateja",
+	"version": "0.1.0",
+	"icon": "assets/icons/lecoder-icon.png",
 	"galleryBanner": {
 		"color": "#FFFFFF",
 		"theme": "light"
@@ -17,36 +17,34 @@
 		"workspace"
 	],
 	"author": {
-		"name": "Kilo Code"
+		"name": "Arya Teja"
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/Kilo-Org/kilocode"
+		"url": "https://github.com/aryateja2106/lecoder-vscode"
 	},
-	"homepage": "https://kilo.ai",
+	"homepage": "https://lesearch.ai",
+	"license": "MIT",
 	"categories": [
 		"AI",
-		"Chat",
-		"Programming Languages",
+		"Machine Learning",
 		"Education",
-		"Snippets",
-		"Testing"
+		"Other"
 	],
 	"keywords": [
-		"kilo",
-		"claude",
-		"dev",
-		"mcp",
-		"openrouter",
-		"coding",
-		"agent",
-		"autonomous",
-		"chatgpt",
-		"sonnet",
+		"lecoder",
 		"ai",
-		"llama",
-		"Kilo Code",
-		"kilocode"
+		"research",
+		"papers",
+		"agents",
+		"colab",
+		"tmux",
+		"orchestration",
+		"claude",
+		"gemini",
+		"codex",
+		"experiments",
+		"arxiv"
 	],
 	"activationEvents": [
 		"onLanguage",

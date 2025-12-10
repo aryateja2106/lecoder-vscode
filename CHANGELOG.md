@@ -1,20 +1,65 @@
-# kilo-code
+# LeCoder AI - Changelog
 
-## 4.133.0
+All notable changes to the LeCoder AI VS Code extension will be documented in this file.
 
-### Minor Changes
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-- [#4317](https://github.com/Kilo-Org/kilocode/pull/4317) [`797c959`](https://github.com/Kilo-Org/kilocode/commit/797c9594a527f19e0d39b7402fb031cd9eb4e2a7) Thanks [@iscekic](https://github.com/iscekic)! - add session versioning
+## [0.1.0] - 2025-12-10
 
-### Patch Changes
+### Added
 
-- [#3571](https://github.com/Kilo-Org/kilocode/pull/3571) [`ea2702c`](https://github.com/Kilo-Org/kilocode/commit/ea2702c6f29e7ff2bfe55714716f72bb43cfbede) Thanks [@yadue](https://github.com/yadue)! - Add batch size and number of retries to the indexing options
+- **Phase 1: Foundation & Rebranding**
+  - Forked from Kilocode repository
+  - Complete rebrand to LeCoder AI
+  - Created foundational directory structure:
+    - `src/agents/` - Agent registry (placeholder)
+    - `src/tmux/` - tmux orchestration (placeholder)
+    - `src/research/` - Research pipeline (placeholder)
+    - `src/storage/` - Local data persistence
+    - `src/orchestration/` - Task orchestration (placeholder)
+    - `src/colab/` - Google Colab integration (placeholder)
+    - `src/ui/` - UI components (placeholder)
+    - `src/cost/` - Cost tracking (placeholder)
+    - `src/safety/` - Safety features (placeholder)
+  - Implemented `.lecoder/` workspace initialization
+  - Created comprehensive documentation:
+    - README.md with project overview
+    - ARCHITECTURE.md with system design
+    - DEVELOPMENT.md with setup guide
+    - docs/agents.md (placeholder)
+    - docs/tmux.md (placeholder)
+    - docs/research-pipeline.md (placeholder)
+  - Updated package metadata for LeCoder AI
+  - Added MIT license
+  - Updated .gitignore to exclude .lecoder/ directory
 
-- [#4310](https://github.com/Kilo-Org/kilocode/pull/4310) [`e5e6085`](https://github.com/Kilo-Org/kilocode/commit/e5e6085d1f9b4f142130eddd3eaddb52bd5cde17) Thanks [@iscekic](https://github.com/iscekic)! - check token before syncing session
+### Changed
 
-- [#4272](https://github.com/Kilo-Org/kilocode/pull/4272) [`3ad35d9`](https://github.com/Kilo-Org/kilocode/commit/3ad35d94a5560ca1b87b2b393c6d064703c144d4) Thanks [@kevinvandijk](https://github.com/kevinvandijk)! - Fix: reset state errors when clearing indexing state
+- Updated extension name from "kilo-code" to "lecoder-vscode"
+- Updated display name to "LeCoder AI"
+- Changed publisher to "aryateja"
+- Updated repository URL to github.com/aryateja2106/lecoder-vscode
+- Updated homepage to lesearch.ai
+- Modified categories to focus on AI, ML, Education
+- Updated keywords for research-focused use case
 
-## 4.132.0
+### Removed
+
+- Removed Kilocode-specific branding assets (to be replaced with LeCoder assets)
+- Cleared old changelog entries from Kilocode
+
+---
+
+## Previous History (Kilocode)
+
+This project is forked from [Kilocode](https://github.com/Kilo-Org/kilocode) version 4.133.0.
+For Kilocode's changelog history, see the original repository.
+
+---
+
+**Document Version**: 0.1.0  
+**Last Updated**: December 2025
 
 ### Minor Changes
 

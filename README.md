@@ -1,110 +1,177 @@
-<p align="center">
-  <a href="https://marketplace.visualstudio.com/items?itemName=kilocode.Kilo-Code"><img src="https://img.shields.io/badge/VS_Code_Marketplace-007ACC?style=flat&logo=visualstudiocode&logoColor=white" alt="VS Code Marketplace"></a>
-  <a href="https://x.com/kilocode"><img src="https://img.shields.io/badge/kilocode-000000?style=flat&logo=x&logoColor=white" alt="X (Twitter)"></a>
-  <a href="https://blog.kilo.ai"><img src="https://img.shields.io/badge/Blog-555?style=flat&logo=substack&logoColor=white" alt="Substack Blog"></a>
-  <a href="https://kilo.ai/discord"><img src="https://img.shields.io/badge/Join%20Discord-5865F2?style=flat&logo=discord&logoColor=white" alt="Discord"></a>
-  <a href="https://www.reddit.com/r/kilocode/"><img src="https://img.shields.io/badge/Join%20r%2Fkilocode-D84315?style=flat&logo=reddit&logoColor=white" alt="Reddit"></a>
-</p>
+# LeCoder AI - VS Code Extension
 
-# 🚀 Kilo
+> **Less Code, More Creation.**
 
-> Kilo is the all-in-one agentic engineering platform. Build, ship, and iterate faster with the most popular open source coding agent.
-> #1 on OpenRouter. 750k+ Kilo Coders. 6.1 trillion tokens used per month.
+LeCoder AI is an agentic research coding assistant for VS Code that helps you reproduce research papers, orchestrate multiple AI agents, and run experiments on Google Colab—all from your editor.
 
-- ✨ Generate code from natural language
-- ✅ Checks its own work
-- 🧪 Run terminal commands
-- 🌐 Automate the browser
-- 🤖 Latest AI models
-- 🎁 API keys optional
-- 💡 **Get $20 in bonus credits when you top-up for the first time** Credits can be used with 500+ models like Gemini 3 Pro, Claude 4.5 Sonnet & Opus, and GPT-5
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![VS Code](https://img.shields.io/badge/VS_Code-^1.85.0-007ACC?logo=visualstudiocode)](https://code.visualstudio.com/)
+[![Node](https://img.shields.io/badge/Node-20.19.2-339933?logo=node.js)](https://nodejs.org/)
 
-<p align="center">
-  <img src="https://media.githubusercontent.com/media/Kilo-Org/kilocode/main/kilo.gif" width="100%" />
-</p>
+## 🎯 Vision
 
-- [VS Code Marketplace](https://kilo.ai/vscode-marketplace?utm_source=Readme) (download)
-- [Official Kilo.ai Home page](https://kilo.ai) (learn more)
+LeCoder AI bridges the gap between research papers and working implementations. Whether you're a researcher, student, or ML engineer, LeCoder helps you:
 
-## Key Features
+- 📄 **Ingest Research Papers**: Convert PDF/arXiv papers to structured markdown
+- 🤖 **Orchestrate AI Agents**: Coordinate Claude Code, Gemini CLI, and Codex CLI agents
+- 🔬 **Run Experiments**: Execute code on Google Colab via LeCoder-cGPU integration
+- 🖥️ **Manage Sessions**: tmux-based orchestration for parallel agent workflows
+- 💾 **Track Everything**: Local storage for tasks, costs, and project metadata
 
-- **Code Generation:** Kilo can generate code using natural language.
-- **Task Automation:** Kilo can automate repetitive coding tasks.
-- **Automated Refactoring:** Kilo can refactor and improve existing code.
-- **MCP Server Marketplace**: Kilo can easily find, and use MCP servers to extend the agent capabilities.
-- **Multi Mode**: Plan with Architect, Code with Coder, and Debug with Debugger, and make your own custom modes.
+## ✨ Key Features (Planned)
 
-## How to get started with Kilo
+### Phase 1: Foundation & Rebranding ✅
+- Clean VS Code extension architecture
+- LeCoder branding and workspace structure
+- `.lecoder/` directory for local data storage
 
-1. Install the Kilo Code extension from the [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=kilocode.Kilo-Code).
-2. Create your account to access 500+ cutting-edge AI models including Gemini 3 Pro, Claude 4.5 Sonnet & Opus, and GPT-5 – with transparent pricing that matches provider rates exactly.
-3. Start coding with AI that adapts to your workflow. Watch our quick-start guide to see Kilo in action:
+### Phase 2: Multi-Agent Orchestration (Coming Soon)
+- Agent registry (Claude Code, Gemini CLI, Codex CLI)
+- tmux session management
+- Agent handoff and task decomposition
 
-[![Watch the video](https://img.youtube.com/vi/pqGfYXgrhig/maxresdefault.jpg)](https://youtu.be/pqGfYXgrhig)
+### Phase 3: Research Pipeline (Coming Soon)
+- PDF/arXiv paper ingestion
+- Markdown conversion with citation tracking
+- Code extraction and analysis
 
-## Extension Development
+### Phase 4: Google Colab Integration (Coming Soon)
+- LeCoder-cGPU backend integration
+- Remote code execution
+- Resource monitoring and cost tracking
 
-For details on building and developing the extension, see [DEVELOPMENT.md](/DEVELOPMENT.md)
+### Phase 5: Advanced Features (Coming Soon)
+- Multi-agent collaboration
+- Safety guardrails
+- Share links (tmate integration)
 
-## Contributing
+## 🚀 Quick Start
 
-Contributions are welcome, and they are greatly appreciated! Get started by reading our [Contributing Guide](CONTRIBUTING.md). Or join our [Discord](https://discord.gg/kilocode) to chat with the team and community.
+### Prerequisites
+- **Node.js**: 20.19.2 or higher
+- **pnpm**: 10.8.1 or higher
+- **tmux**: For session orchestration (install via `brew install tmux` on macOS)
+- **VS Code**: 1.85.0 or higher
 
-Thanks to all the contributors who help make Kilo better!
+### Installation from Source
 
-<table>
-  <tr>
-    <td align="center">
-      <a href="https://github.com/mcowger">
-        <img src="https://avatars.githubusercontent.com/u/1929548?size=100" width="100" height="100" alt="mcowger" style="border-radius: 50%;" />
-      </a>
-    </td>
-    <td align="center">
-      <a href="https://github.com/bhaktatejas922">
-        <img src="https://avatars.githubusercontent.com/u/26863466?size=100" width="100" height="100" alt="bhaktatejas922" style="border-radius: 50%;" />
-      </a>
-    </td>
-    <td align="center">
-      <a href="https://github.com/NyxJae">
-        <img src="https://avatars.githubusercontent.com/u/52313587?size=100" width="100" height="100" alt="NyxJae" style="border-radius: 50%;" />
-      </a>
-    </td>
-    <td align="center">
-      <a href="https://github.com/Aikiboy123">
-        <img src="https://avatars.githubusercontent.com/u/161741275?size=100" width="100" height="100" alt="Aikiboy123" style="border-radius: 50%;" />
-      </a>
-    </td>
-    <td align="center">
-      <a href="https://github.com/cobra91">
-        <img src="https://avatars.githubusercontent.com/u/1060585?size=100" width="100" height="100" alt="cobra91" style="border-radius: 50%;" />
-      </a>
-    </td>
-  </tr>
-  <tr>
-    <td align="center">
-      <a href="https://github.com/ivanarifin">
-        <img src="https://avatars.githubusercontent.com/u/111653938?size=100" width="100" height="100" alt="ivanarifin" style="border-radius: 50%;" />
-      </a>
-    </td>
-    <td align="center">
-      <a href="https://github.com/PeterDaveHello">
-        <img src="https://avatars.githubusercontent.com/u/3691490?size=100" width="100" height="100" alt="PeterDaveHello" style="border-radius: 50%;" />
-      </a>
-    </td>
-    <td align="center">
-      <a href="https://github.com/possible055">
-        <img src="https://avatars.githubusercontent.com/u/38576169?size=100" width="100" height="100" alt="possible055" style="border-radius: 50%;" />
-      </a>
-    </td>
-    <td align="center">
-      <a href="https://github.com/seuros">
-        <img src="https://avatars.githubusercontent.com/u/2394703?size=100" width="100" height="100" alt="seuros" style="border-radius: 50%;" />
-      </a>
-    </td>
-    <td align="center">
-      <a href="https://github.com/Kilo-Org/kilocode/graphs/contributors">
-        <b>more ...</b>
-      </a>
-    </td>
-  </tr>
-</table>
+```bash
+# Clone the repository
+git clone https://github.com/aryateja2106/lecoder-vscode.git
+cd lecoder-vscode
+
+# Install dependencies
+pnpm install
+
+# Build the extension
+pnpm build
+
+# Launch VS Code with the extension
+# Press F5 in VS Code to open Extension Development Host
+```
+
+### Installation from Marketplace (Coming Soon)
+
+Once published, you'll be able to install LeCoder AI directly from the VS Code Marketplace.
+
+## 📖 Usage
+
+### Initialize LeCoder Workspace
+
+When you open a folder in VS Code with LeCoder installed, it automatically creates a `.lecoder/` directory with the following structure:
+
+```
+.lecoder/
+├── agents.json          # Agent registry
+├── tasks.json           # Task metadata
+├── cost-logs.json       # Cost tracking logs
+├── projects.json        # Project metadata
+├── tmux-sessions.json   # Active tmux sessions
+└── share-links.json     # tmate share links
+```
+
+### Basic Workflow (Coming in Phase 2+)
+
+1. **Ingest a Paper**: Open Command Palette (⇧⌘P) → "LeCoder: Ingest Research Paper"
+2. **Orchestrate Agents**: Create a task and assign agents from the sidebar
+3. **Run Experiments**: Execute code on Google Colab with one click
+4. **Track Progress**: Monitor agent activity, costs, and outputs in real-time
+
+## 🏗️ Architecture
+
+LeCoder is built on a modular architecture:
+
+```
+src/
+├── agents/          # Agent registry and management
+├── tmux/            # tmux session orchestration
+├── research/        # Paper ingestion pipeline
+├── storage/         # Local data persistence
+├── orchestration/   # Task decomposition and handoff
+├── colab/           # LeCoder-cGPU integration
+├── ui/              # Webview panels
+├── cost/            # Cost tracking
+└── safety/          # Safety features
+```
+
+For detailed architecture documentation, see [ARCHITECTURE.md](ARCHITECTURE.md).
+
+## 🛠️ Development
+
+For detailed development instructions, see [DEVELOPMENT.md](DEVELOPMENT.md).
+
+### Quick Development Setup
+
+```bash
+# Install dependencies
+pnpm install
+
+# Run linter
+pnpm lint
+
+# Run type checking
+pnpm check-types
+
+# Build the extension
+pnpm build
+
+# Clean build artifacts
+pnpm clean
+```
+
+## 🤝 Contributing
+
+We welcome contributions! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+
+## 📚 Documentation
+
+- [Architecture Overview](ARCHITECTURE.md)
+- [Development Guide](DEVELOPMENT.md)
+- [Agent Configuration](docs/agents.md)
+- [tmux Integration](docs/tmux.md)
+- [Research Pipeline](docs/research-pipeline.md)
+
+## 🔗 Related Projects
+
+- [LeCoder-cGPU](https://github.com/aryateja2106/lecoder-cgpu) - Google Colab backend for remote execution
+- [nested-learning](https://github.com/aryateja2106/nested-learning) - Research paper dataset and tools
+- [LeSearch AI](https://lesearch.ai) - Main project website
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🙏 Acknowledgments
+
+LeCoder AI is forked from [Kilocode](https://github.com/Kilo-Org/kilocode), an excellent open-source coding agent. We're grateful to the Kilocode team for their foundational work.
+
+## 📞 Contact
+
+- **Website**: [lesearch.ai](https://lesearch.ai)
+- **GitHub**: [@aryateja2106](https://github.com/aryateja2106)
+
+---
+
+**Version**: 0.1.0 (Foundation & Rebranding Phase)  
+**Status**: Early Development  
+**Last Updated**: December 2025
