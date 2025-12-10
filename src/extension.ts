@@ -369,28 +369,29 @@ export async function activate(context: vscode.ExtensionContext) {
 		}),
 	)
 
-	// kilocode_change start
+	// LeCoder first-install experience
 	if (!context.globalState.get("firstInstallCompleted")) {
 		outputChannel.appendLine("First installation detected, opening LeCoder AI sidebar!")
 		try {
-			await vscode.commands.executeCommand("kilo-code.SidebarProvider.focus")
+			// Focus LeCoder sidebar using new view ID
+			await vscode.commands.executeCommand("lecoder.SidebarProvider.focus")
 
-			// LeCoder walkthrough not yet implemented - commenting out Kilocode walkthrough
-			// outputChannel.appendLine("Opening LeCoder AI walkthrough")
-			// TODO: Create LeCoder-specific walkthrough and update command ID
-			// await vscode.commands.executeCommand(
-			// 	"workbench.action.openWalkthrough",
-			// 	"aryateja.lecoder-vscode#lecoderWalkthrough",
-			// 	false,
-			// )
+			// Open LeCoder walkthrough
+			outputChannel.appendLine("Opening LeCoder AI walkthrough")
+			await vscode.commands.executeCommand(
+				"workbench.action.openWalkthrough",
+				"aryateja.lecoder-vscode#lecoderWalkthrough",
+				false,
+			)
 
 			// Enable autocomplete by default for new installs, but not for JetBrains IDEs
-			// JetBrains users can manually enable it if they want to test the feature
-			const { kiloCodeWrapperJetbrains } = getKiloCodeWrapperProperties()
+			// Detect JetBrains wrapper via environment variable
+			const isJetBrainsWrapper = process.env.KILOCODE_WRAPPER_JETBRAINS === "true" || 
+				vscode.env.appName.includes("wrapper") && !vscode.env.appName.includes("cli")
 			const currentGhostSettings = contextProxy.getValue("ghostServiceSettings")
 			await contextProxy.setValue("ghostServiceSettings", {
 				...currentGhostSettings,
-				enableAutoTrigger: !kiloCodeWrapperJetbrains,
+				enableAutoTrigger: !isJetBrainsWrapper,
 				enableQuickInlineTaskKeybinding: true,
 				enableSmartInlineTaskKeybinding: true,
 			})
@@ -400,7 +401,7 @@ export async function activate(context: vscode.ExtensionContext) {
 			await context.globalState.update("firstInstallCompleted", true)
 		}
 	}
-	// kilocode_change end
+	// LeCoder first-install experience end
 
 	// Auto-import configuration if specified in settings
 	try {
@@ -486,18 +487,18 @@ export async function activate(context: vscode.ExtensionContext) {
 		}),
 	)
 
-	// kilocode_change start - Kilo Code specific registrations
+	// LeCoder: Wrapper-specific registrations (inherited from Kilocode JetBrains integration)
 	const { kiloCodeWrapped, kiloCodeWrapperCode } = getKiloCodeWrapperProperties()
 	if (kiloCodeWrapped) {
-		// Only foward logs in Jetbrains
+		// Only forward logs in JetBrains wrapper
 		registerMainThreadForwardingLogger(context)
 	}
-	// Don't register the ghost provider for the CLI
+	// Don't register the ghost provider for the CLI wrapper
 	if (kiloCodeWrapperCode !== "cli") {
 		registerGhostProvider(context, provider)
 	}
-	registerCommitMessageProvider(context, outputChannel) // kilocode_change
-	// kilocode_change end - Kilo Code specific registrations
+	registerCommitMessageProvider(context, outputChannel)
+	// LeCoder: End wrapper-specific registrations
 
 	registerCodeActions(context)
 	registerTerminalActions(context)

@@ -138,11 +138,10 @@ export class ClineProvider
 	extends EventEmitter<TaskProviderEvents>
 	implements vscode.WebviewViewProvider, TelemetryPropertiesProvider, TaskProviderLike
 {
-	// Used in package.json as the view's id. This value cannot be changed due
-	// to how VSCode caches views based on their id, and updating the id would
-	// break existing instances of the extension.
-	public static readonly sideBarId = `${Package.name}.SidebarProvider`
-	public static readonly tabPanelId = `${Package.name}.TabPanelProvider`
+	// View IDs used in package.json. LeCoder uses 'lecoder' as the short name.
+	// Note: Changed from 'kilo-code' to 'lecoder' as part of rebranding.
+	public static readonly sideBarId = `${Package.shortName}.SidebarProvider`
+	public static readonly tabPanelId = `${Package.shortName}.TabPanelProvider`
 	private static activeInstances: Set<ClineProvider> = new Set()
 	private disposables: vscode.Disposable[] = []
 	private webviewDisposables: vscode.Disposable[] = []

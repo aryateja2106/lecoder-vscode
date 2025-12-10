@@ -245,10 +245,10 @@ const getCommandsMap = ({ context, outputChannel }: RegisterCommandOptions): Rec
 		}
 
 		visibleProvider.postMessageToWebview({ type: "acceptInput" })
-	}, // kilocode_change begin
+	}, // LeCoder: Focus chat input
 	focusChatInput: async () => {
 		try {
-			await vscode.commands.executeCommand("kilo-code.SidebarProvider.focus")
+			await vscode.commands.executeCommand("lecoder.SidebarProvider.focus")
 			await delay(100)
 
 			let visibleProvider = getVisibleProviderOrLog(outputChannel)
